@@ -1,5 +1,11 @@
 import React, { useState } from "react";
 import { Menu } from "antd";
+import { TfiUser } from "react-icons/tfi";
+import { HiMiniUserCircle } from "react-icons/hi2";
+import { BsHeart } from "react-icons/bs";
+import { BsCart3 } from "react-icons/bs";
+import { IoSearch } from "react-icons/io5";
+import logo from '../../assets/images/logo.png';
 import {
   AppstoreOutlined,
   SettingOutlined,
@@ -27,7 +33,12 @@ const Header = () => {
           
           <div className="col-sm-4 col-lg-3 text-center text-sm-start">
             <div className="main-logo">
-              
+            <img 
+                                            src={logo}
+                                           
+                                            alt='logo'
+                                            className='hidden lg:block'
+                                        />
             </div>
           </div>
           
@@ -54,29 +65,30 @@ const Header = () => {
           
           <div className="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
             <div className="support-box text-end d-none d-xl-block">
-              <span className="fs-6 text-muted">For Support?</span>
-              <h5 className="mb-0">+980-34984089</h5>
+             
+              <h5 className="mb-0">+229-34984089</h5>
             </div>
 
             <ul className="d-flex justify-content-end list-unstyled m-0">
               <li>
-                <a  className="rounded-circle bg-light p-2 mx-1">
-                  <svg width="24" height="24" viewBox="0 0 24 24"><use ></use></svg>
+                <a  className="rounded-circle bg-light p-2 mx-1 " >
+                <svg width="24" height="24" > <HiMiniUserCircle size={26}/></svg>
+                
                 </a>
               </li>
               <li>
                 <a  className="rounded-circle bg-light p-2 mx-1">
-                  <svg width="24" height="24" viewBox="0 0 24 24"><use ></use></svg>
+                  <svg width="24" height="24" > <BsHeart size={22}/></svg>
                 </a>
               </li>
               <li className="d-lg-none">
                 <a  className="rounded-circle bg-light p-2 mx-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
-                  <svg width="24" height="24" viewBox="0 0 24 24"><use ></use></svg>
+                  <svg width="24" height="24" ><BsCart3 size={24}/></svg>
                 </a>
               </li>
               <li className="d-lg-none">
                 <a  className="rounded-circle bg-light p-2 mx-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearch" aria-controls="offcanvasSearch">
-                  <svg width="24" height="24" viewBox="0 0 24 24"><use ></use></svg>
+                  <svg width="24" height="24" ><IoSearch size={24}/></svg>
                 </a>
               </li>
             </ul>
