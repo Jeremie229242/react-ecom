@@ -1,44 +1,46 @@
 import React, { useState } from "react";
-import { Menu } from "antd";
-import { TfiUser } from "react-icons/tfi";
+
+
 import { HiMiniUserCircle } from "react-icons/hi2";
 import { BsHeart } from "react-icons/bs";
 import { BsCart3 } from "react-icons/bs";
 import { IoSearch } from "react-icons/io5";
 import logo from '../../assets/images/logo.png';
-import {
-  AppstoreOutlined,
-  SettingOutlined,
-  UserOutlined,
-  UserAddOutlined,
-} from "@ant-design/icons";
+import DisplayCartItem from '../DisplayCartItem.js';
+import DisplaySearchItem from '../DisplaySearchItem.js';
+import { Link } from "react-router-dom";
 
-const { SubMenu, Item } = Menu;
+
+
 
 const Header = () => {
   const [current, setCurrent] = useState("home");
-
+  const [openCartSection,setOpenCartSection] = useState(false)
+  const [openSearchSection,setOpenSearchSection] = useState(false)
+  const [openUserMenu,setOpenUserMenu] = useState(false)
   const handleClick = (e) => {
     // console.log(e.key);
     setCurrent(e.key);
   };
 
   return (
-    <Menu onClick={handleClick} selectedKeys={[current]} >
-      
+   
+     
 
       <header>
+      
       <div className="container-fluid">
         <div className="row py-3 border-bottom">
           
           <div className="col-sm-4 col-lg-3 text-center text-sm-start">
             <div className="main-logo">
-            <img 
+            <Link to="/"> <img 
                                             src={logo}
                                            
                                             alt='logo'
                                             className='hidden lg:block'
-                                        />
+                                        /></Link>
+           
             </div>
           </div>
           
@@ -53,7 +55,7 @@ const Header = () => {
                 </select>
               </div>
               <div className="col-11 col-md-7">
-                <form id="search-form" className="text-center" >
+                <form  className="text-center" >
                   <input type="text" className="form-control border-0 bg-transparent" placeholder="Search for more than 20,000 products" />
                 </form>
               </div>
@@ -66,37 +68,41 @@ const Header = () => {
           <div className="col-sm-8 col-lg-4 d-flex justify-content-end gap-5 align-items-center mt-4 mt-sm-0 justify-content-center justify-content-sm-end">
             <div className="support-box text-end d-none d-xl-block">
              
-              <h5 className="mb-0">+229-34984089</h5>
+              <h5 className="mb-0">+229-96969696</h5>
             </div>
 
             <ul className="d-flex justify-content-end list-unstyled m-0">
               <li>
                 <a  className="rounded-circle bg-light p-2 mx-1 " >
-                <svg width="24" height="24" > <HiMiniUserCircle size={26}/></svg>
+                <Link to="/login"><svg width="24" height="24" > <HiMiniUserCircle size={26}/></svg></Link>
+                
                 
                 </a>
               </li>
               <li>
                 <a  className="rounded-circle bg-light p-2 mx-1">
-                  <svg width="24" height="24" > <BsHeart size={22}/></svg>
+                <Link to="/heart"><svg width="24" height="24" > <BsHeart size={22}/></svg></Link>
+                  
                 </a>
               </li>
               <li className="d-lg-none">
-                <a  className="rounded-circle bg-light p-2 mx-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
+                <a  className="rounded-circle bg-light p-2 mx-1" onClick={()=>setOpenCartSection(true)} >
+                
                   <svg width="24" height="24" ><BsCart3 size={24}/></svg>
                 </a>
               </li>
               <li className="d-lg-none">
-                <a  className="rounded-circle bg-light p-2 mx-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSearch" aria-controls="offcanvasSearch">
+                <a  className="rounded-circle bg-light p-2 mx-1" onClick={()=>setOpenSearchSection(true)} >
+                
                   <svg width="24" height="24" ><IoSearch size={24}/></svg>
                 </a>
               </li>
             </ul>
 
-            <div className="cart text-end d-none d-lg-block dropdown">
-              <button className="border-0 bg-transparent d-flex flex-column gap-2 lh-1" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
-                <span className="fs-6 text-muted dropdown-toggle">Your Cart</span>
-                <span className="cart-total fs-5 fw-bold">$1290.00</span>
+            <div className="cart text-end d-none d-lg-block ">
+              <button onClick={()=>setOpenCartSection(true)} className="border-0 bg-transparent d-flex flex-column gap-2 lh-1"   >
+                <span className="fs-6 text-muted ">Panier</span>
+                <span className="cart-total fs-5 fw-bold">cfa1290.00</span>
               </button>
             </div>
           </div>
@@ -111,79 +117,185 @@ const Header = () => {
           <nav className="main-menu d-flex navbar navbar-expand-lg">
             
 
-            <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
+            <button onClick={()=>setOpenUserMenu(true)} className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar"
               aria-controls="offcanvasNavbar">
               <span className="navbar-toggler-icon"></span>
             </button>
 
-            <div className="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
 
-              <div className="offcanvas-header justify-content-center">
-                <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-              </div>
+<div class="offcanvas-header justify-content-center">
+  <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+</div>
 
-              <div className="offcanvas-body ">
-            
-                <select className="filter-categories border-0 mb-0 me-5">
-                  <option>Shop by Departments</option>
-                  <option>Groceries</option>
-                  <option>Drinks</option>
-                  <option>Chocolates</option>
-                </select>
-            
-                <ul className="navbar-nav justify-content-end menu-list list-unstyled d-flex gap-md-3 mb-0">
-               
-                  <li className="nav-item active">
-                    <a href="#women" className="nav-link">Women</a>
-                  </li>
-                  <li className="nav-item dropdown">
-                    <a href="#men" className="nav-link">Men</a>
-                  </li>
-                  <li className="nav-item">
-                    <a href="#kids" className="nav-link">Kids</a>
-                  </li>
-                  <li className="nav-item">
-                    <a href="#accessories" className="nav-link">Accessories</a>
-                  </li>
-                  <li className="nav-item dropdown">
-                    <a className="nav-link dropdown-toggle" role="button" id="pages" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
-                    <ul className="dropdown-menu" aria-labelledby="pages">
-                      <li><a href="index.html" className="dropdown-item">About Us </a></li>
-                      <li><a href="index.html" className="dropdown-item">Shop </a></li>
-                      <li><a href="index.html" className="dropdown-item">Single Product </a></li>
-                      <li><a href="index.html" className="dropdown-item">Cart </a></li>
-                      <li><a href="index.html" className="dropdown-item">Checkout </a></li>
-                      <li><a href="index.html" className="dropdown-item">Blog </a></li>
-                      <li><a href="index.html" className="dropdown-item">Single Post </a></li>
-                      <li><a href="index.html" className="dropdown-item">Styles </a></li>
-                      <li><a href="index.html" className="dropdown-item">Contact </a></li>
-                      <li><a href="index.html" className="dropdown-item">Thank You </a></li>
-                      <li><a href="index.html" className="dropdown-item">My Account </a></li>
-                      <li><a href="index.html" className="dropdown-item">404 Error </a></li>
-                    </ul>
-                  </li>
-                  <li className="nav-item">
-                    <a href="#brand" className="nav-link">Brand</a>
-                  </li>
-                  <li className="nav-item">
-                    <a href="#sale" className="nav-link">Sale</a>
-                  </li>
-                  <li className="nav-item">
-                    <a href="#blog" className="nav-link">Blog</a>
-                  </li>
-                </ul>
-              
-              </div>
+<div class="offcanvas-body">
 
-            </div>
+  <select class="filter-categories border-0 mb-0 me-5">
+    <option>Shop by Departments</option>
+    <option>Groceries</option>
+    <option>Drinks</option>
+    <option>Chocolates</option>
+  </select>
+
+  <ul class="navbar-nav justify-content-end menu-list list-unstyled d-flex gap-md-3 mb-0">
+    <li class="nav-item active">
+    <Link to="/women" class="nav-link">Women</Link>
+      
+    </li>
+    <li class="nav-item dropdown">
+    <Link to="/men" className="nav-link">Men</Link>
+     
+    </li>
+    <li class="nav-item">
+    <Link to="/kids" class="nav-link">Kids</Link>
+      
+    </li>
+    <li class="nav-item">
+    <Link to="/acess" className="nav-link">Accessories</Link>
+    
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" role="button" id="pages" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
+      <ul class="dropdown-menu" aria-labelledby="pages">
+        <li>
+        <Link to="/propos" class="dropdown-item">About Us</Link>
+        
+        </li>
+        <li>
+        <Link to="/sahop" className="dropdown-item">Shop</Link>
+       
+        </li>
+       
+      </ul>
+    </li>
+    <li class="nav-item">
+    <Link to="/brand" className="nav-link">Brand</Link>
+      
+    </li>
+    <li class="nav-item">
+    <Link to="/sale" className="nav-link">Sale</Link>
+     
+    </li>
+    <li class="nav-item">
+    <Link to="/blog" className="nav-link">Blog</Link>
+     
+    </li>
+  </ul>
+
+</div>
+
+</div>
+
+            {openUserMenu && (
+        <>
+          <div
+            className="offcanvas-backdrop fade show"
+            onClick={() => setOpenUserMenu(false)}
+            style={{ zIndex: 1040 }}
+          />
+          
+          <div className="offcanvas offcanvas-end show d-block" tabIndex="-1" style={{ visibility: 'visible', backgroundColor: 'white', zIndex: 1050 }} close={() => setOpenUserMenu(false)} >
+
+<div className="offcanvas-header justify-content-center">
+  <button type="button" className="btn-close" data-bs-dismiss="offcanvas" onClick={() => setOpenUserMenu(false)}></button>
+</div>
+
+<div className="offcanvas-body " style={{ maxHeight: '80vh', overflowY: 'auto' }}>
+
+  <select className="filter-categories border-0 mb-0 me-5">
+    <option>Shop by Departments</option>
+    <option>Groceries</option>
+    <option>Drinks</option>
+    <option>Chocolates</option>
+  </select>
+
+  <ul class="navbar-nav justify-content-end menu-list list-unstyled d-flex gap-md-3 mb-0">
+    <li class="nav-item active">
+    <Link to="/women" class="nav-link">Women</Link>
+      
+    </li>
+    <li class="nav-item dropdown">
+    <Link to="/men" className="nav-link">Men</Link>
+     
+    </li>
+    <li class="nav-item">
+    <Link to="/kids" class="nav-link">Kids</Link>
+      
+    </li>
+    <li class="nav-item">
+    <Link to="/acess" className="nav-link">Accessories</Link>
+    
+    </li>
+    <li class="nav-item dropdown">
+      <a class="nav-link dropdown-toggle" role="button" id="pages" data-bs-toggle="dropdown" aria-expanded="false">Pages</a>
+      <ul class="dropdown-menu" aria-labelledby="pages">
+        <li>
+        <Link to="/propos" class="dropdown-item">About Us</Link>
+        
+        </li>
+        <li>
+        <Link to="/sahop" className="dropdown-item">Shop</Link>
+       
+        </li>
+       
+      </ul>
+    </li>
+    <li class="nav-item">
+    <Link to="/brand" className="nav-link">Brand</Link>
+      
+    </li>
+    <li class="nav-item">
+    <Link to="/sale" className="nav-link">Sale</Link>
+     
+    </li>
+    <li class="nav-item">
+    <Link to="/blog" className="nav-link">Blog</Link>
+     
+    </li>
+  </ul>
+
+</div>
+
+</div>
+        </>
+      )}
+           
           </nav>
           </div>
         </div>
       </div>
     
+
+{openCartSection && (
+        <>
+          <div
+            className="offcanvas-backdrop fade show"
+            onClick={() => setOpenCartSection(false)}
+            style={{ zIndex: 1040 }}
+          />
+          <DisplayCartItem close={() => setOpenCartSection(false)} />
+        </>
+      )}
+
+
+
+
+{openSearchSection && (
+        <>
+          <div
+            className="offcanvas-backdrop fade show"
+            onClick={() => setOpenSearchSection(false)}
+            style={{ zIndex: 1040 }}
+          />
+          <DisplaySearchItem close={() => setOpenSearchSection(false)} />
+        </>
+      )}
+
+
+
 </header>
 
-    </Menu>
+
     
   );
 };
