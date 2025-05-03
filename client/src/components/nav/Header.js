@@ -9,6 +9,7 @@ import logo from '../../assets/images/logo.png';
 import DisplayCartItem from '../DisplayCartItem.js';
 import DisplaySearchItem from '../DisplaySearchItem.js';
 import { Link } from "react-router-dom";
+import firebase from "firebase/compat/app";
 
 
 
