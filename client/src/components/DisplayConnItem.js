@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 import { FaCaretRight } from "react-icons/fa";
 import firebase from "firebase/compat/app";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { HiOutlineLogout } from "react-icons/hi";
 import { FaUserEdit } from "react-icons/fa";
@@ -17,6 +17,7 @@ import { FaUser } from "react-icons/fa";
 const DisplayConnItem = ({close}) => {
   
   let dispatch = useDispatch();
+  let { user } = useSelector((state) => ({ ...state }));
   let history = useHistory();
 
 
@@ -40,11 +41,15 @@ const DisplayConnItem = ({close}) => {
       </div>
       <div className="offcanvas-body" style={{ maxHeight: '80vh', overflowY: 'auto' }}>
         <div className="order-md-last">
+        {!user && (
           <h4 className="d-flex justify-content-between align-items-center mb-3">
             <span className="text-primary">Page de connexion</span>
            
           </h4>
-          <ul className="list-group mb-3">
+        )}
+
+            {!user && (
+              <ul className="list-group mb-3">
             <li className="list-group-item d-flex justify-content-between lh-sm">
               <div>
                 <h6 className="my-0" > <Link to="/login" class="nav-link"> <FaUser size={20} />Se Connecter</Link></h6>
@@ -62,8 +67,28 @@ const DisplayConnItem = ({close}) => {
            
            
           </ul>
-  
+
+      )}
+
+      {user && (
+          <h4 className="d-flex justify-content-between align-items-center mb-3">
+            <span className="text-primary">Dashboard</span>
+           
+          </h4>
+          
+         
+
+        )}
+
+        {user && (
           <button className="w-100 btn btn-primary btn-lg" type="submit" onClick={logout}><HiOutlineLogout size={30} />Deconnexion</button>
+
+          
+         
+
+        )}
+           
+  
         </div>
       </div>
     </div>
