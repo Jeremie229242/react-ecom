@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { auth } from "../../firebase";
 import  { toast } from 'react-hot-toast';
-
+import { MdOutlineMarkEmailUnread } from "react-icons/md";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -46,7 +46,7 @@ const Register = () => {
       />
 
       <button type="submit" className="btn-primary mt-5 btn btn-raised">
-        Register/ {email}
+      <MdOutlineMarkEmailUnread size={24} />  Register/ {email}
       </button>
     </form>
   );

@@ -17,12 +17,12 @@ const RegisterComplete = ({ history }) => {
     e.preventDefault();
     // validation
     if (!email || !password) {
-      toast.error("Email and password is required");
+      toast.error("Email et Mot de Passe est Obligatoire");
       return;
     }
 
     if (password.length < 6) {
-      toast.error("Password must be at least 6 characters long");
+      toast.error("Le mot de passe doit comporter au moins 6 caractères");
       return;
     }
 

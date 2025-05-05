@@ -8,6 +8,7 @@ import { IoSearch } from "react-icons/io5";
 import logo from '../../assets/images/logo.png';
 import DisplayCartItem from '../DisplayCartItem.js';
 import DisplaySearchItem from '../DisplaySearchItem.js';
+import DisplayConnItem from '../DisplayConnItem.js';
 import { Link } from "react-router-dom";
 import firebase from "firebase/compat/app";
 
@@ -18,6 +19,7 @@ const Header = () => {
   const [current, setCurrent] = useState("home");
   const [openCartSection,setOpenCartSection] = useState(false)
   const [openSearchSection,setOpenSearchSection] = useState(false)
+  const [openConnSection,setOpenConnSection] = useState(false)
   const [openUserMenu,setOpenUserMenu] = useState(false)
   const handleClick = (e) => {
     // console.log(e.key);
@@ -74,8 +76,8 @@ const Header = () => {
 
             <ul className="d-flex justify-content-end list-unstyled m-0">
               <li>
-                <a  className="rounded-circle bg-light p-2 mx-1 " >
-                <Link to="/login"><svg width="24" height="24" > <HiMiniUserCircle size={26}/></svg></Link>
+                <a  className="rounded-circle bg-light p-2 mx-1 " onClick={()=>setOpenConnSection(true)} >
+                <svg width="24" height="24" > <HiMiniUserCircle size={26}/></svg>
                 
                 
                 </a>
@@ -289,6 +291,18 @@ const Header = () => {
             style={{ zIndex: 1040 }}
           />
           <DisplaySearchItem close={() => setOpenSearchSection(false)} />
+        </>
+      )}
+
+
+      {openConnSection && (
+        <>
+          <div
+            className="offcanvas-backdrop fade show"
+            onClick={() => setOpenConnSection(false)}
+            style={{ zIndex: 1040 }}
+          />
+          <DisplayConnItem close={() => setOpenConnSection(false)} />
         </>
       )}
 
