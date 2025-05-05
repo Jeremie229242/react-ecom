@@ -1,16 +1,26 @@
-import React, { useState } from "react";
+import React, { useState , useEffect } from "react";
 import { MdOutlineMarkEmailUnread } from "react-icons/md";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { auth, googleAuthProvider } from "../../firebase";
 import  { toast } from 'react-hot-toast';
 import { GrGooglePlus } from "react-icons/gr";
+import { Link } from "react-router-dom";
 
 const Login = ({ history }) => {
   const [email, setEmail] = useState("jeremie229242@gmail.com");
   const [password, setPassword] = useState("123456");
   const [loading, setLoading] = useState(false);
 
+  
+
+  const { user } = useSelector((state) => ({ ...state }));
+
+  useEffect(() => {
+    if (user && user.token) history.push("/");
+  }, [user]);
+
   let dispatch = useDispatch();
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -132,6 +142,10 @@ const Login = ({ history }) => {
           ><GrGooglePlus size={24} />
             Login with Google
           </button>
+
+          <Link to="/forgot/password" className="float-right text-danger">
+            Forgot Password
+          </Link>
         </div>
       </div>
     </div>
